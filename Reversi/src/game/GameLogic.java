@@ -19,6 +19,7 @@ public class GameLogic {
 		boolean b = false;
 	    ArrayList<Point> v = this.findPoints(a);
 	    for(int i = 0; i < v.size(); i++) {
+	    	System.out.print(v.get(i).getX()); System.out.println(v.get(i).getY());
 	        if ((v.get(i).getX() == p.getX()) && 
 	        		(v.get(i).getY() == p.getY())) {
 	            b = true;
@@ -28,12 +29,15 @@ public class GameLogic {
 	    return b;
 
 	}
-	public void replaceDisk(int i, int j) {
+	
+	public void flip(int i, int j) {
 	    char a = board.getSquare(i,j);
 	    if (a == 'X') {
+	    	System.out.println("x");
 	        board.setSquare(i, j, 'O');
 	    }
 	    if (a == 'O') {
+	    	System.out.println("o");
 	        board.setSquare(i, j, 'X');
 	    }
 	}
@@ -41,8 +45,8 @@ public class GameLogic {
 	    this.board.setSquare(i, j, a);
 	    ArrayList<Point> vec = this.checking(i, j, a);
 	    int size = vec.size();
-	    for(int m = 0; i < size ; i++) {
-	        this.replaceDisk(vec.get(m).getX(),vec.get(m).getY());
+	    for(int m = 0; m < size ; m++) {
+	        this.flip(vec.get(m).getX(),vec.get(m).getY());
 	    }
 	    list.clear();
 	}
@@ -53,8 +57,8 @@ public class GameLogic {
 		
 		int dimention = board.getDimensions();
 
-	    for (int i = 1; i < dimention; i++) {
-	        for (int j = 1; j < dimention; j++) {
+	    for (int i = 0; i < dimention; i++) {
+	        for (int j = 0; j < dimention; j++) {
 	            if (board.getSquare(i, j) == ' ') {
 	                check.addAll(this.checking(i, j, a));
 	                if (check.size() != 0) {

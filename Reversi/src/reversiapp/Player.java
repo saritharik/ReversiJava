@@ -19,7 +19,7 @@ public class Player {
     
     public void draw(int cellWidth, int cellHeight) {
 		 iv.setFitWidth(cellWidth);
-		 iv.setFitHeight(cellHeight);
+	     iv.setFitHeight(cellHeight);
 		 grid.getChildren().remove(iv);
 		 grid.add(iv, col, row);
 	}
@@ -27,22 +27,25 @@ public class Player {
     public void moveUp() {
     	 row--; // need to check that player doesn't hit a wall
     	 redraw();
-    	 }
-    	 public void moveDown() {
+    }
+    
+    public void moveDown() {
     	 row++;
     	 redraw();
-    	 }
-    	 public void moveLeft() {
+    }
+    
+     public void moveLeft() {
     	 col--;
     	 redraw();
-    	 }
-    	 public void moveRight() {
+     }
+    
+     public void moveRight() {
     	 col++;
     	 redraw();
-    	 }
-    	 private void redraw() {
+   	 }
+   
+     private void redraw() {
     	 grid.getChildren().remove(iv);
     	 grid.add(iv, col, row);
-    	 }
-
+     }
 }
