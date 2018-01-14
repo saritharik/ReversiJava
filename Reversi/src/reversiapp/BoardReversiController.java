@@ -8,6 +8,8 @@ import game.GameLogic;
 import game.GuiGame;
 import game.Point;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -26,7 +28,7 @@ public class BoardReversiController extends GridPane {
 	//private static final int FREE = 0;
 	//private static final int WALL = 1;
 
-	public BoardReversiController(Board board, GuiGame game) {
+	public BoardReversiController(Board board, ReversiGameController game) {
 		player = new Player(this, 0, 0);
 		this.board = board;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardReversi.fxml"));
@@ -45,10 +47,19 @@ public class BoardReversiController extends GridPane {
 				int x = (int) event.getSceneX() / this.cellWidth;
 				int y = (int) event.getSceneY() / this.cellHeight;
 				
-				game.playOneTurn(new Point(x, y));
-				this.draw();
-				this.drawOptions(game.options());
-				//this.drawDisks();
+				boolean gameIn = game.playOneTurn(new Point(x, y));
+				if (gameIn) {
+					this.draw();
+					this.drawOptions(game.options());
+				} else {
+					this.draw();
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("End Of Game");
+					alert.setHeaderText("The Winner Is:");
+					alert.setContentText("Player " + game.getTheWinner() + "!!!!");
+
+					alert.showAndWait();
+				}
 
 				event.consume();
 		 });
@@ -76,7 +87,6 @@ public class BoardReversiController extends GridPane {
 		 }
 		 drawDisks();
 		 board.printBoard();
-		 //player.draw(cellWidth, cellHeight); 
 	}
 
 	 private void drawDisks() {

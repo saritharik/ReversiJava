@@ -11,22 +11,36 @@ import game.HumanPlayer;
 import game.Point;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 public class ReversiGameController extends HBox implements Initializable{
 	@FXML
 	private HBox root;
 	private Board board = new GuiBoard(4);
-	
+	@FXML
+	private Label firstPlayerPoints;
+	@FXML
+	private Label secondPlayerPoints;
+	@FXML
+	private Label currPlayer;
+	private static final int START_POINT = 2;
 	private HumanPlayer player1 = new HumanPlayer('X');
 	private HumanPlayer player2 = new HumanPlayer('O');
 	private GameLogic gameLogic = new GameLogic(board);
-	private GuiGame game = new GuiGame(player1, player2, board, gameLogic);
-
+	//private GuiGame game = new GuiGame(player1, player2, board, gameLogic);
+	private HumanPlayer currentPlayer = player1;
+	private boolean firstPlayer = true;
+	
 	 
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
-		 BoardReversiController reversiBoard = new BoardReversiController(board, game);
+		 player1.setPoint(START_POINT);
+		 player2.setPoint(START_POINT);
+		 this.firstPlayerPoints.setText("First Player Points: " + player1.getPoint());
+		 this.secondPlayerPoints.setText("Second Player Points: " + player2.getPoint());
+		 this.currPlayer.setText("Current Player: " + this.currentPlayer.getDisk());
+		 BoardReversiController reversiBoard = new BoardReversiController(board, this);
 		 
 		 /*root.widthProperty().addListener((observable, oldValue, newValue) -> {
 			 double boardNewWidth = newValue.doubleValue() - 120;
@@ -43,8 +57,66 @@ public class ReversiGameController extends HBox implements Initializable{
 		 reversiBoard.setPrefHeight(400);
 		 root.getChildren().add(0, reversiBoard);
 		 reversiBoard.draw();
-		 reversiBoard.drawOptions(game.options());
-		 
-		
+		 reversiBoard.drawOptions(this.options());
+	}
+	 
+	 public ArrayList<Point> options() {
+		 return this.gameLogic.findPoints(this.currentPlayer.getDisk());
+	}
+	 
+	 public boolean playOneTurn(Point corrdinate) {
+		 ArrayList<Point> n1 = this.gameLogic.checking(
+				 corrdinate.getY(), corrdinate.getX(), currentPlayer.getDisk());
+		 int points = n1.size();
+		 boolean legalMove = this.gameLogic.possibleMoves(new Point(corrdinate.getY(), corrdinate.getX()),
+				 this.currentPlayer.getDisk());
+		 if (legalMove) {
+			 this.gameLogic.oneMove(corrdinate.getY(), corrdinate.getX(), this.currentPlayer.getDisk());
+			 
+			 if (firstPlayer) {
+				 player1.setPoint(1 + points);
+			     player2.setPoint(-points);
+				 this.currentPlayer = this.player2;
+				 firstPlayer = false;
+			 } else {
+				 player2.setPoint(1 + points);
+			     player1.setPoint(-points);
+				 this.currentPlayer = this.player1;
+				 firstPlayer = true;
+			 }
+			 if (this.options().isEmpty()) {
+				 if (firstPlayer) {
+					 this.currentPlayer = this.player2;
+					 firstPlayer = false;
+				 } else {
+					 this.currentPlayer = this.player1;
+					 firstPlayer = true;
+				 }
+			 }
+			 if (this.gameLogic.findPoints(player1.getDisk()).isEmpty() && 
+					 this.gameLogic.findPoints(player2.getDisk()).isEmpty()) {
+					drawPoints();
+
+				 return false;
+			 }
+		}
+		drawPoints();
+		return true;
+	}
+	 
+	 public void drawPoints() {
+		 this.firstPlayerPoints.setText("First Player Points: " + player1.getPoint());
+		 this.secondPlayerPoints.setText("Second Player Points: " + player2.getPoint());
+		 this.currPlayer.setText("Current Player: " + this.currentPlayer.getDisk()); 
+	 }
+	 
+	 public char getTheWinner() {
+		 if (this.player1.getPoint() > this.player2.getPoint()) {
+			 return player1.getDisk();
+		 } else if (this.player2.getPoint() > this.player1.getPoint()) {
+			 return player2.getDisk();
+		 } else {
+			 return ' ';
+		 }
 	 }
 }

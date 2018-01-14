@@ -26,22 +26,11 @@ public class GuiGame {
 		return this.gameLogic.findPoints(this.currentPlayer.getDisk());
 	}
 
-	public void playOneTurn(Point corrdinate) {
+	public boolean playOneTurn(Point corrdinate) {
 		boolean legalMove = this.gameLogic.possibleMoves(new Point(corrdinate.getY(), corrdinate.getX()),
 				this.currentPlayer.getDisk());
 		if (legalMove) {
-			System.out.println("true");
 			this.gameLogic.oneMove(corrdinate.getY(), corrdinate.getX(), this.currentPlayer.getDisk());
-		}
-		
-		if (firstPlayer) {
-			this.currentPlayer = this.player2;
-			firstPlayer = false;
-		} else {
-			this.currentPlayer = this.player1;
-			firstPlayer = true;
-		}
-		if (this.options().isEmpty()) {
 			if (firstPlayer) {
 				this.currentPlayer = this.player2;
 				firstPlayer = false;
@@ -49,7 +38,28 @@ public class GuiGame {
 				this.currentPlayer = this.player1;
 				firstPlayer = true;
 			}
+			if (this.options().isEmpty()) {
+				System.out.println(this.currentPlayer.getDisk());
+				if (firstPlayer) {
+					this.currentPlayer = this.player2;
+					firstPlayer = false;
+				} else {
+					this.currentPlayer = this.player1;
+					firstPlayer = true;
+				}
+				//if (this.options().isEmpty()) {
+				//	System.out.println("false");
+				//	System.out.println(this.currentPlayer.getDisk());
+				//	return false;
+				//}
+			}
+			if (this.gameLogic.findPoints(player1.getDisk()).isEmpty() &&
+					this.gameLogic.findPoints(player2.getDisk()).isEmpty()) {
+				return false;
+			}
 		}
 		
+		
+		return true;
 	}
 }

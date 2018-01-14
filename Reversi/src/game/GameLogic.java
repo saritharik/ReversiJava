@@ -19,7 +19,6 @@ public class GameLogic {
 		boolean b = false;
 	    ArrayList<Point> v = this.findPoints(a);
 	    for(int i = 0; i < v.size(); i++) {
-	    	System.out.print(v.get(i).getX()); System.out.println(v.get(i).getY());
 	        if ((v.get(i).getX() == p.getX()) && 
 	        		(v.get(i).getY() == p.getY())) {
 	            b = true;
@@ -33,11 +32,9 @@ public class GameLogic {
 	public void flip(int i, int j) {
 	    char a = board.getSquare(i,j);
 	    if (a == 'X') {
-	    	System.out.println("x");
 	        board.setSquare(i, j, 'O');
 	    }
 	    if (a == 'O') {
-	    	System.out.println("o");
 	        board.setSquare(i, j, 'X');
 	    }
 	}

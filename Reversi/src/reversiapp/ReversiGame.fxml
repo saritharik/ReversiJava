@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -8,18 +9,18 @@
 <HBox fx:id="root" prefHeight="400.0" prefWidth="520.0" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reversiapp.ReversiGameController">
    <children>
    
-   	<VBox spacing="10">
+   	<VBox prefHeight="400.0" prefWidth="156.0" spacing="10">
          <HBox.margin>
             <Insets />
          </HBox.margin>
          <children>
-            <Label text="current player:">
+            <Label fx:id= "currPlayer">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </Label>
-            <Label text="Black player score:" />
-            <Label text="White player score:" />
+            <Label  fx:id="firstPlayerPoints" />
+            <Label  fx:id="secondPlayerPoints"/>
          </children>
    	</VBox>
    </children>
