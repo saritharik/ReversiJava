@@ -80,7 +80,7 @@ public class GameLogic {
 	    } else {
 	        other = 'X';
 	    }
-	    while (i - 1 > 0) {
+	    while (i - 1 >= 0) {
 	        if (board.getSquare(i-1, j) != ' ' &&
 	            board.getSquare(i-1, j) == other) {
 	            vecTemp.add(new Point(i-1, j));
@@ -94,7 +94,7 @@ public class GameLogic {
 	    }
 	    vecTemp.clear();
 	    i = row; j = col;
-	    while (j - 1 > 0) {
+	    while (j - 1 >= 0) {
 	        if (board.getSquare(i, j-1) != ' ' &&
 	            board.getSquare(i, j-1) == other) {
 	        	vecTemp.add(new Point(i, j-1));
@@ -153,7 +153,7 @@ public class GameLogic {
 	    vecTemp.clear();
 	    i = row; j = col;
 	    while (j + 1 < dimention &&
-	           i - 1 > 0) {
+	           i - 1 >= 0) {
 	        if (this.board.getSquare(i-1, j+1) != ' ' &&
 	            this.board.getSquare(i-1, j+1) == other) {
 	            vecTemp.add(new Point(i-1, j+1));
@@ -167,7 +167,7 @@ public class GameLogic {
 	    }
 	    vecTemp.clear();
 	    i = row; j = col;
-	    while (j - 1 > 0 && i - 1 > 0) {
+	    while (j - 1 >= 0 && i - 1 >= 0) {
 	        if (this.board.getSquare(i-1, j-1) != ' ' &&
 	            this.board.getSquare(i-1, j-1) == other) {
 	            vecTemp.add(new Point(i-1, j-1));
@@ -181,7 +181,7 @@ public class GameLogic {
 	    }
 	    vecTemp.clear();
 	    i = row; j = col;
-	    while (j - 1 > 0 &&
+	    while (j - 1 >= 0 &&
 	           i + 1 < dimention) {
 	        if (this.board.getSquare(i+1, j-1) != ' ' &&
 	            this.board.getSquare(i+1, j-1) == other) {

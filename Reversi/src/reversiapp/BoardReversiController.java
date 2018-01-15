@@ -24,10 +24,6 @@ public class BoardReversiController extends GridPane {
 	private int cellHeight;
 	private int cellWidth;
 
-	//private int[][] board;
-	//private static final int FREE = 0;
-	//private static final int WALL = 1;
-
 	public BoardReversiController(Board board, ReversiGameController game) {
 		player = new Player(this, 0, 0);
 		this.board = board;
@@ -86,7 +82,7 @@ public class BoardReversiController extends GridPane {
 		 	}
 		 }
 		 drawDisks();
-		 board.printBoard();
+		 //board.printBoard();
 	}
 
 	 private void drawDisks() {

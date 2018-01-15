@@ -39,7 +39,6 @@ public class GuiGame {
 				firstPlayer = true;
 			}
 			if (this.options().isEmpty()) {
-				System.out.println(this.currentPlayer.getDisk());
 				if (firstPlayer) {
 					this.currentPlayer = this.player2;
 					firstPlayer = false;
@@ -47,11 +46,6 @@ public class GuiGame {
 					this.currentPlayer = this.player1;
 					firstPlayer = true;
 				}
-				//if (this.options().isEmpty()) {
-				//	System.out.println("false");
-				//	System.out.println(this.currentPlayer.getDisk());
-				//	return false;
-				//}
 			}
 			if (this.gameLogic.findPoints(player1.getDisk()).isEmpty() &&
 					this.gameLogic.findPoints(player2.getDisk()).isEmpty()) {

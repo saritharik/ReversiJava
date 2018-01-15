@@ -14,8 +14,7 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		InputStreamReader r = new InputStreamReader(ClassLoader.getSystemClassLoader()
-                .getResourceAsStream("Settings.txt"));
+		
 		try {
 			HBox root = (HBox)FXMLLoader.load(getClass().getResource("ReversiGame.fxml"));
 			Scene scene = new Scene(root,550,400);

@@ -1,5 +1,7 @@
 package reversiapp;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,7 +19,7 @@ import javafx.scene.layout.HBox;
 public class ReversiGameController extends HBox implements Initializable{
 	@FXML
 	private HBox root;
-	private Board board = new GuiBoard(4);
+	private Board board;
 	@FXML
 	private Label firstPlayerPoints;
 	@FXML
@@ -35,6 +37,13 @@ public class ReversiGameController extends HBox implements Initializable{
 	 
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
+		 BufferedReader r = new BufferedReader(new InputStreamReader(ClassLoader.getSystemClassLoader().
+                 getResourceAsStream("reversiapp/Settings.txt")));
+		 Settings settings = new Settings(r);
+		 settings.readFromFile();
+		 System.out.println(settings.getSizeBoard());
+		 this.board = new GuiBoard(settings.getSizeBoard());
+		 
 		 player1.setPoint(START_POINT);
 		 player2.setPoint(START_POINT);
 		 this.firstPlayerPoints.setText("First Player Points: " + player1.getPoint());
@@ -61,7 +70,10 @@ public class ReversiGameController extends HBox implements Initializable{
 	}
 	 
 	 public ArrayList<Point> options() {
-		 return this.gameLogic.findPoints(this.currentPlayer.getDisk());
+		 ArrayList<Point> arr = this.gameLogic.findPoints(this.currentPlayer.getDisk());
+		 System.out.println(arr.size());
+		 
+		 return arr;
 	}
 	 
 	 public boolean playOneTurn(Point corrdinate) {
