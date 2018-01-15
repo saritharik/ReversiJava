@@ -1,8 +1,4 @@
 package reversiapp;
-	
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -25,7 +21,6 @@ public class Main extends Application {
 			ReversiGameController gameController = new ReversiGameController();
 			
 			primaryStage.show();
-			//gameController.playGame();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

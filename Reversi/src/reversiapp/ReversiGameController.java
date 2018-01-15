@@ -8,13 +8,11 @@ import java.util.ResourceBundle;
 import game.Board;
 import game.GameLogic;
 import game.GuiBoard;
-import game.GuiGame;
 import game.HumanPlayer;
 import game.Point;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 public class ReversiGameController extends HBox implements Initializable{
 	@FXML
@@ -27,11 +25,10 @@ public class ReversiGameController extends HBox implements Initializable{
 	@FXML
 	private Label currPlayer;
 	private static final int START_POINT = 2;
-	private HumanPlayer player1 = new HumanPlayer('X');
-	private HumanPlayer player2 = new HumanPlayer('O');
-	private GameLogic gameLogic = new GameLogic(board);
-	//private GuiGame game = new GuiGame(player1, player2, board, gameLogic);
-	private HumanPlayer currentPlayer = player1;
+	private HumanPlayer player1;
+	private HumanPlayer player2;
+	private GameLogic gameLogic;
+	private HumanPlayer currentPlayer;
 	private boolean firstPlayer = true;
 	
 	 
@@ -41,8 +38,17 @@ public class ReversiGameController extends HBox implements Initializable{
                  getResourceAsStream("reversiapp/Settings.txt")));
 		 Settings settings = new Settings(r);
 		 settings.readFromFile();
-		 System.out.println(settings.getSizeBoard());
 		 this.board = new GuiBoard(settings.getSizeBoard());
+		 gameLogic = new GameLogic(board);
+		 player1 = new HumanPlayer(settings.getFirstPlayer());
+		 char p2Disk;
+		 if (settings.getFirstPlayer() == 'X') {
+			 p2Disk = 'O';
+		 } else {
+			 p2Disk = 'X';
+		 }
+		 player2 = new HumanPlayer(p2Disk);
+		 this.currentPlayer = player1;
 		 
 		 player1.setPoint(START_POINT);
 		 player2.setPoint(START_POINT);
@@ -71,8 +77,6 @@ public class ReversiGameController extends HBox implements Initializable{
 	 
 	 public ArrayList<Point> options() {
 		 ArrayList<Point> arr = this.gameLogic.findPoints(this.currentPlayer.getDisk());
-		 System.out.println(arr.size());
-		 
 		 return arr;
 	}
 	 

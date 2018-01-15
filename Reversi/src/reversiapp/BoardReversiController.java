@@ -2,10 +2,7 @@ package reversiapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import game.Board;
-import game.GameLogic;
-import game.GuiGame;
 import game.Point;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -17,7 +14,7 @@ import javafx.scene.shape.Rectangle;
 
 public class BoardReversiController extends GridPane {
 	private Board board;
-	private Player player;
+	//private Player player;
 	private int height;
 	private int width;
 	private int size;
@@ -25,7 +22,7 @@ public class BoardReversiController extends GridPane {
 	private int cellWidth;
 
 	public BoardReversiController(Board board, ReversiGameController game) {
-		player = new Player(this, 0, 0);
+		//player = new Player(this, 0, 0);
 		this.board = board;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardReversi.fxml"));
 		fxmlLoader.setRoot(this);
@@ -74,7 +71,6 @@ public class BoardReversiController extends GridPane {
 		 
 		 for (int i = 0; i < size; i++) {
 			 for (int j = 0; j < size; j++) {
-				 //this.add(new Rectangle(cellWidth, cellHeight, Color.BEIGE), j, i);
 					 Rectangle rec = new Rectangle(this.cellWidth, this.cellHeight,Color.BEIGE);
 					 rec.setStroke(Color.BLACK);
 					 this.add(rec, j, i);
@@ -82,7 +78,6 @@ public class BoardReversiController extends GridPane {
 		 	}
 		 }
 		 drawDisks();
-		 //board.printBoard();
 	}
 
 	 private void drawDisks() {
