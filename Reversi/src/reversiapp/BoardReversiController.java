@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import game.Board;
 import game.Point;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -84,11 +86,17 @@ public class BoardReversiController extends GridPane {
 		 for (int i = 0; i < size; i++) {
 			 for(int j = 0; j < size; j++) {
 				 if (board.getSquare(i, j) == 'X') {
-					 this.add(new Circle(this.cellWidth / 2, this.cellHeight / 2,
-							 this.cellHeight / 3, Color.BLACK), j, i);
+					 Circle blackCircle = new Circle(this.cellWidth / 2, this.cellHeight / 2,
+							 this.cellHeight / 3, Color.BLACK);
+					 GridPane.setHalignment(blackCircle, HPos.CENTER);
+					 GridPane.setValignment(blackCircle, VPos.CENTER);
+					 blackCircle.setStroke(Color.BLACK);
+					 this.add(blackCircle, j, i);
 				 } else if (board.getSquare(i, j) == 'O') {
 					 Circle whiteCircle = new Circle(this.cellWidth / 2, this.cellHeight / 2,
 							 this.cellHeight / 3, Color.WHITE);
+					 GridPane.setHalignment(whiteCircle, HPos.CENTER);
+					 GridPane.setValignment(whiteCircle, VPos.CENTER);
 					 whiteCircle.setStroke(Color.BLACK);
 					 this.add(whiteCircle, j, i);
 				 }
@@ -99,8 +107,11 @@ public class BoardReversiController extends GridPane {
 	 public void drawOptions(ArrayList<Point> options) {
 		 
 		 for (int i = 0; i < options.size(); i++) {
-			 this.add(new Circle(this.cellWidth / 2, this.cellHeight / 2,
-					 this.cellHeight / 4, Color.GREENYELLOW), options.get(i).getY(), options.get(i).getX());
+			 Circle option = new Circle(this.cellWidth / 2, this.cellHeight / 2,
+					 this.cellHeight / 4, Color.GREENYELLOW);
+			 GridPane.setHalignment(option, HPos.CENTER);
+			 GridPane.setValignment(option, VPos.CENTER);
+			 this.add(option, options.get(i).getY(), options.get(i).getX());
 		 }
 	 }
 }

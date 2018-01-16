@@ -1,0 +1,4 @@
+X
+black
+white
+8
