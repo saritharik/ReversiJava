@@ -97,6 +97,9 @@ public class BoardReversiController extends GridPane {
 	}
 
 	 private void drawDisks() {
+		 
+		 System.out.println("draw");
+		 
 		 for (int i = 0; i < size; i++) {
 			 for(int j = 0; j < size; j++) {
 				 if (board.getSquare(i, j) == 'X') {
