@@ -39,15 +39,15 @@ public class ReversiGameController extends HBox implements Initializable{
 		 Settings settings = new Settings(r);
 		 settings.readFromFile();
 		 this.board = new GuiBoard(settings.getSizeBoard());
-		 gameLogic = new GameLogic(board);
-		 player1 = new HumanPlayer(settings.getFirstPlayer());
+		 this.gameLogic = new GameLogic(board);
+		 this.player1 = new HumanPlayer(settings.getFirstPlayer());
 		 char p2Disk;
 		 if (settings.getFirstPlayer() == 'X') {
 			 p2Disk = 'O';
 		 } else {
 			 p2Disk = 'X';
 		 }
-		 player2 = new HumanPlayer(p2Disk);
+		 this.player2 = new HumanPlayer(p2Disk);
 		 this.currentPlayer = player1;
 		 
 		 player1.setPoint(START_POINT);
@@ -55,7 +55,8 @@ public class ReversiGameController extends HBox implements Initializable{
 		 this.firstPlayerPoints.setText("First Player Points: " + player1.getPoint());
 		 this.secondPlayerPoints.setText("Second Player Points: " + player2.getPoint());
 		 this.currPlayer.setText("Current Player: " + this.currentPlayer.getDisk());
-		 BoardReversiController reversiBoard = new BoardReversiController(board, this);
+		 BoardReversiController reversiBoard = new BoardReversiController(board, this,
+				 settings.getFirstPlayerColor(), settings.getSecondPlayerColor());
 		 
 		 /*root.widthProperty().addListener((observable, oldValue, newValue) -> {
 			 double boardNewWidth = newValue.doubleValue() - 120;

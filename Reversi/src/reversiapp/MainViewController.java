@@ -11,7 +11,6 @@ public class MainViewController {
 		main.showGameScene();
 	}
 	
-	
 	@FXML
 	private void goToSettings() {
 		main.showSettings();

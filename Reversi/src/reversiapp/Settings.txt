@@ -1,4 +1,4 @@
 X
-black
-white
+Red
+Blue
 8

@@ -2,13 +2,17 @@ package reversiapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import game.Board;
 import game.Point;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -22,9 +26,20 @@ public class BoardReversiController extends GridPane {
 	private int size;
 	private int cellHeight;
 	private int cellWidth;
+	private String firstPlayerColor;
+	private String secondPlayerColor;
+	Map<String, String> map;
 
-	public BoardReversiController(Board board, ReversiGameController game) {
+	public BoardReversiController(Board board, ReversiGameController game,
+									String firstColor, String secondColor) {
 		//player = new Player(this, 0, 0);
+		this.map = new HashMap<String, String>(); 
+	      map.put("Green", "Green.jpg");
+	      map.put("Red", "Red.jpg");
+	      map.put("Yellow", "Yellow.jpg");
+	      map.put("Blue", "Blue.jpg");
+	      this.firstPlayerColor = map.get(firstColor);
+	      this.secondPlayerColor = map.get(secondColor);
 		this.board = board;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardReversi.fxml"));
 		fxmlLoader.setRoot(this);
@@ -59,7 +74,6 @@ public class BoardReversiController extends GridPane {
 				event.consume();
 		 });
 		} catch (Exception e) {
-		 
 		}
 }
 	 
@@ -86,19 +100,23 @@ public class BoardReversiController extends GridPane {
 		 for (int i = 0; i < size; i++) {
 			 for(int j = 0; j < size; j++) {
 				 if (board.getSquare(i, j) == 'X') {
-					 Circle blackCircle = new Circle(this.cellWidth / 2, this.cellHeight / 2,
-							 this.cellHeight / 3, Color.BLACK);
-					 GridPane.setHalignment(blackCircle, HPos.CENTER);
-					 GridPane.setValignment(blackCircle, VPos.CENTER);
-					 blackCircle.setStroke(Color.BLACK);
-					 this.add(blackCircle, j, i);
+					 /*this.add(new Circle(this.cellWidth / 2, this.cellHeight / 2,
+							 this.cellHeight / 3, Color.BLACK), j, i);*/
+					 ImageView firstColor = new ImageView(getClass().getResource(this.firstPlayerColor).toExternalForm());
+					 firstColor.setFitWidth(cellWidth);
+					 firstColor.setFitHeight(cellHeight);
+					 //this.getChildren().remove(firstColor);
+					 this.add(firstColor, j, i);
 				 } else if (board.getSquare(i, j) == 'O') {
-					 Circle whiteCircle = new Circle(this.cellWidth / 2, this.cellHeight / 2,
-							 this.cellHeight / 3, Color.WHITE);
-					 GridPane.setHalignment(whiteCircle, HPos.CENTER);
-					 GridPane.setValignment(whiteCircle, VPos.CENTER);
-					 whiteCircle.setStroke(Color.BLACK);
-					 this.add(whiteCircle, j, i);
+					 ImageView secondColor = new ImageView(getClass().getResource(this.secondPlayerColor).toExternalForm());
+					 secondColor.setFitWidth(cellWidth);
+					 secondColor.setFitHeight(cellHeight);
+					 //this.getChildren().remove(secondColor);
+					 this.add(secondColor, j, i);
+					 //Circle whiteCircle = new Circle(this.cellWidth / 2, this.cellHeight / 2,
+						//	 this.cellHeight / 3, Color.WHITE);
+					 //whiteCircle.setStroke(Color.BLACK);
+					 //this.add(this.secondPlayerColor, j, i);
 				 }
 			 }
 		 }
@@ -107,11 +125,8 @@ public class BoardReversiController extends GridPane {
 	 public void drawOptions(ArrayList<Point> options) {
 		 
 		 for (int i = 0; i < options.size(); i++) {
-			 Circle option = new Circle(this.cellWidth / 2, this.cellHeight / 2,
-					 this.cellHeight / 4, Color.GREENYELLOW);
-			 GridPane.setHalignment(option, HPos.CENTER);
-			 GridPane.setValignment(option, VPos.CENTER);
-			 this.add(option, options.get(i).getY(), options.get(i).getX());
+			 this.add(new Circle(this.cellWidth / 2, this.cellHeight / 2,
+					 this.cellHeight / 4, Color.GREENYELLOW), options.get(i).getY(), options.get(i).getX());
 		 }
 	 }
 }
