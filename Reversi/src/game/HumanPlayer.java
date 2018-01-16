@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class HumanPlayer {
 	private char disk;
 	private int points;
+	private String color;
 	
-	public HumanPlayer(char p) {
+	public HumanPlayer(char p, String color) {
 	    this.disk = p;
 		this.points = 0;
+		this.color = color;
 	}
 	
 	public Point chooseSquare(ArrayList<Point> vecPoints) {
