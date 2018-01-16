@@ -38,8 +38,8 @@ public class BoardReversiController extends GridPane {
 	      map.put("Red", "Red.jpg");
 	      map.put("Yellow", "Yellow.jpg");
 	      map.put("Blue", "Blue.jpg");
-	      this.firstPlayerColor = firstColor;
-	      this.secondPlayerColor = secondColor; new ImageView(getClass().getResource(map.get(secondColor)).toExternalForm());
+	      this.firstPlayerColor = map.get(firstColor);
+	      this.secondPlayerColor = map.get(secondColor);
 		this.board = board;
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BoardReversi.fxml"));
 		fxmlLoader.setRoot(this);
@@ -102,13 +102,13 @@ public class BoardReversiController extends GridPane {
 				 if (board.getSquare(i, j) == 'X') {
 					 /*this.add(new Circle(this.cellWidth / 2, this.cellHeight / 2,
 							 this.cellHeight / 3, Color.BLACK), j, i);*/
-					 ImageView firstColor = new ImageView(getClass().getResource(map.get(this.firstPlayerColor)).toExternalForm());
+					 ImageView firstColor = new ImageView(getClass().getResource(this.firstPlayerColor).toExternalForm());
 					 firstColor.setFitWidth(cellWidth);
 					 firstColor.setFitHeight(cellHeight);
 					 //this.getChildren().remove(firstColor);
 					 this.add(firstColor, j, i);
 				 } else if (board.getSquare(i, j) == 'O') {
-					 ImageView secondColor = new ImageView(getClass().getResource(map.get(this.secondPlayerColor)).toExternalForm());
+					 ImageView secondColor = new ImageView(getClass().getResource(this.secondPlayerColor).toExternalForm());
 					 secondColor.setFitWidth(cellWidth);
 					 secondColor.setFitHeight(cellHeight);
 					 //this.getChildren().remove(secondColor);
