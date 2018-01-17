@@ -5,16 +5,14 @@ import java.util.ArrayList;
 public class HumanPlayer {
 	private char disk;
 	private int points;
-	private String color;
 	
 	/**
      * Constructor.
      * @param p the disk.
      */
-	public HumanPlayer(char p, String color) {
+	public HumanPlayer(char p) {
 	    this.disk = p;
 		this.points = 0;
-		this.color = color;
 	}
 	
 	/**

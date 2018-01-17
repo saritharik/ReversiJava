@@ -33,18 +33,25 @@
                   <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="First Player" />
-                  <Label text="Color of first player:" GridPane.rowIndex="1" />
-                  <Label text="Color of second player:" GridPane.rowIndex="2" />
-                  <Label text="Size of board:" GridPane.rowIndex="3" />
+                  <Label text="First Player" textFill="#ddaa0e" />
+                  <Label text="Color of first player:" textFill="#ddaa0e" GridPane.rowIndex="1" />
+                  <Label text="Color of second player:" textFill="#ddaa0e" GridPane.rowIndex="2" />
+                  <Label text="Size of board:" textFill="#ddaa0e" GridPane.rowIndex="3" />
                   <ComboBox fx:id="firstPlayer" prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="1" />
                   <ComboBox fx:id="firstPlayerColor" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ComboBox fx:id="secondPlayerColor" prefHeight="25.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="SizeBoard" prefHeight="25.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Button fx:id="finishSet" contentDisplay="CENTER" mnemonicParsing="false" onAction="#write" text="finish" textAlignment="CENTER" textFill="#c20606" />
          </children>
       </VBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="finishSet" contentDisplay="CENTER" mnemonicParsing="false" onAction="#write" text="finish" textAlignment="CENTER" textFill="#c20606" />
+            <Button mnemonicParsing="false" onAction="#goHome" text="Home" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

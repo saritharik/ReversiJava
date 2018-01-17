@@ -1,5 +1,6 @@
 package reversiapp;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
+	private static Scene scene;
 	@Override
 	public void start(Stage primaryStage) {
 		/*try {
@@ -29,9 +31,11 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}*/
-		
 		this.primaryStage = primaryStage;
+
+		//this.scene = new Scene(mainLayout);
 		this.showHome();
+		
 		
 	}
 	
@@ -43,8 +47,8 @@ public class Main extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(mainLayout);
-		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		scene = new Scene(mainLayout);
+		scene.getStylesheets().add(Main.class.getResource("MainView.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -53,6 +57,8 @@ public class Main extends Application {
 		try {
 			HBox game = (HBox)FXMLLoader.load(Main.class.getResource("ReversiGame.fxml"));
 			ReversiGameController gameController = new ReversiGameController();
+			
+			scene.getStylesheets().add(Main.class.getResource("ReversiGame.css").toExternalForm());
 			mainLayout.setCenter(game);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -72,8 +72,16 @@ public class BoardReversiController extends GridPane {
 					this.draw();
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("End Of Game");
-					alert.setHeaderText("The Winner Is:");
-					alert.setContentText("Player " + game.getTheWinner() + "!!!!");
+					if (game.getTheWinner() == 'X') {
+						alert.setHeaderText("The Winner Is:");
+						alert.setContentText("Player " + game.getTheWinner() + "!!!!");
+					} else if (game.getTheWinner() == 'O') {
+						alert.setHeaderText("The Winner Is:");
+						alert.setContentText("Player " + game.getTheWinner() + "!!!!");
+					} else {
+						alert.setHeaderText(" ");
+						alert.setContentText("The game ended in a draw!");
+					}
 
 					alert.showAndWait();
 				}

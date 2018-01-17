@@ -27,12 +27,15 @@ public class SettingsController  implements Initializable {
 	private ComboBox SizeBoard;
 	@FXML
 	private Button finishSet;
+	
+	private Main main;
 	ObservableList<String> firstPlayerOptions = FXCollections.observableArrayList("X", "O");
 	ObservableList<String> firstPlayerColorOptions = FXCollections.observableArrayList(
 			"Black", "White", "Red", "Blue", "Yellow", "Green", "Gray", "Light Blue", "Purple");
 	ObservableList<String> secondPlayerColorOptions = FXCollections.observableArrayList(
 			"Black", "White", "Red", "Blue", "Yellow", "Green", "Gray", "Light Blue", "Purple");
-	ObservableList<String> SizeBoardOptions = FXCollections.observableArrayList("4", "6", "8", "10", "12", "14");
+	ObservableList<String> SizeBoardOptions = FXCollections.observableArrayList("4", "6", "8", "10", "12", "14"
+			,"16" , "18", "20");
 	
 	/**
 	 * init the 
@@ -78,5 +81,9 @@ public class SettingsController  implements Initializable {
 			writer.close();
 		}
 		
+	}
+	
+	public void goHome() {
+		main.showHome();
 	}
 }

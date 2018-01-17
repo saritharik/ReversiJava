@@ -33,6 +33,7 @@ public class Settings {
 	 */
 	public Settings(Reader reader) {
 		this.reader = (BufferedReader) reader;
+		SettingsController controller = new SettingsController();
 	}
 	
 	/**

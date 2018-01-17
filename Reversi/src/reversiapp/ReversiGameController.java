@@ -28,6 +28,7 @@ public class ReversiGameController extends HBox implements Initializable{
 	@FXML
 	private Label currPlayer;
 	private static final int START_POINT = 2;
+	private static final int DEFAULT_SIZE_BOARD = 8;
 	private HumanPlayer player1;
 	private HumanPlayer player2;
 	private GameLogic gameLogic;
@@ -41,26 +42,34 @@ public class ReversiGameController extends HBox implements Initializable{
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
 		 //open file of settings
+		 String firstColor = "Black";
+		 String secondColor = "White";
 		 File file = new File("settings.txt");
 		 FileReader fReader = null;
 		 try {
 			fReader = new FileReader("settings.txt");
+			BufferedReader r = new BufferedReader(fReader);
+			 Settings settings = new Settings(r);
+			 settings.readFromFile();
+			 this.board = new GuiBoard(settings.getSizeBoard());
+			 this.gameLogic = new GameLogic(board);
+			 this.player1 = new HumanPlayer(settings.getFirstPlayer());
+			 char p2Disk;
+			 if (settings.getFirstPlayer() == 'X') {
+				 p2Disk = 'O';
+			 } else {
+				 p2Disk = 'X';
+			 }
+			 this.player2 = new HumanPlayer(p2Disk);
+			 firstColor = settings.getFirstPlayerColor();
+			 secondColor = settings.getSecondPlayerColor();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			 this.board = new GuiBoard(DEFAULT_SIZE_BOARD);
+			 this.gameLogic = new GameLogic(board);
+			 this.player1 = new HumanPlayer('X');
+			 this.player2 = new HumanPlayer('O');
 		}
-		 BufferedReader r = new BufferedReader(fReader);
-		 Settings settings = new Settings(r);
-		 settings.readFromFile();
-		 this.board = new GuiBoard(settings.getSizeBoard());
-		 this.gameLogic = new GameLogic(board);
-		 this.player1 = new HumanPlayer(settings.getFirstPlayer(), settings.getFirstPlayerColor());
-		 char p2Disk;
-		 if (settings.getFirstPlayer() == 'X') {
-			 p2Disk = 'O';
-		 } else {
-			 p2Disk = 'X';
-		 }
-		 this.player2 = new HumanPlayer(p2Disk, settings.getSecondPlayerColor());
+		 
 		 this.currentPlayer = player1;
 		 
 		 player1.setPoint(START_POINT);
@@ -71,7 +80,7 @@ public class ReversiGameController extends HBox implements Initializable{
 		 
 		 //init the board controller
 		 BoardReversiController reversiBoard = new BoardReversiController(board, this,
-				 settings.getFirstPlayerColor(), settings.getSecondPlayerColor());
+				 firstColor, secondColor);
 
 		 reversiBoard.setPrefWidth(400);
 		 reversiBoard.setPrefHeight(400);
