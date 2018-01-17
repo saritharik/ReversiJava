@@ -8,13 +8,24 @@ public class GameLogic {
 	private int xPoints;
 	private ArrayList<Point> list = new ArrayList<Point>();
 	public static final int START_POINT = 2;
-
+	 
+	/**
+     * Constructor.
+     * @param p1 first player.
+     * @param p2 second player.
+     */
 	public GameLogic(Board b) {
 		this.board = b;
 	    this.oPoints = START_POINT;
 	    this.xPoints = START_POINT;
 	}
 
+	/**
+     * Check if the player choose right location.
+     * @param p the selected point.
+     * @param a the disk.
+     * @return true or false.
+     */
 	public boolean possibleMoves(Point p, char a) {
 		boolean b = false;
 	    ArrayList<Point> v = this.findPoints(a);
@@ -29,6 +40,11 @@ public class GameLogic {
 
 	}
 	
+	/**
+     * Flip one disk in other.
+     * @param i the row.
+     * @param j the col.
+     */
 	public void flip(int i, int j) {
 	    char a = board.getSquare(i,j);
 	    if (a == 'X') {
@@ -38,6 +54,13 @@ public class GameLogic {
 	        board.setSquare(i, j, 'X');
 	    }
 	}
+	
+	/**
+     * Make one move in the game.
+     * @param i the row.
+     * @param j the col.
+     * @param a the disk.
+     */
 	public void oneMove(int i, int j, char a) {
 	    this.board.setSquare(i, j, a);
 	    ArrayList<Point> vec = this.checking(i, j, a);
@@ -48,6 +71,11 @@ public class GameLogic {
 	    list.clear();
 	}
 
+	/**
+     * Find the possible locations to put disks.
+     * @param a the disk.
+     * @return list of points.
+     */
 	public ArrayList<Point> findPoints(char a) {
 		ArrayList<Point> points = new ArrayList<Point>();
 		ArrayList<Point> check = new ArrayList<Point>();
@@ -70,6 +98,13 @@ public class GameLogic {
 	    return points;
 	}
 
+	/**
+     * Checking which points need to replace.
+     * @param i the row.
+     * @param j the col.
+     * @param a the disk.
+     * @return vector of all points.
+     */
 	public ArrayList<Point> checking(int i, int j, char a) {
 	    int row = i;
 	    int col = j;
@@ -198,6 +233,11 @@ public class GameLogic {
 	    return this.list;
 	}
 
+	/**
+     * Set points to player.
+     * @param player - to which player set points.
+     * @param points - the number of points.
+     */
 	public void setPlayerPoints(char player, int points) {
 	    if (player == 'X') {
 	        xPoints = points;
@@ -206,6 +246,11 @@ public class GameLogic {
 	    }
 	}
 
+	/**
+     * Returns points of each player.
+     * @param player - to return him points.
+     * @return points.
+     */
 	public int getPointsByPlayer(char player) {
 	    if (player == 'X') {
 	        return xPoints;

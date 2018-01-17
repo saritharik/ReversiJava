@@ -14,13 +14,18 @@
             <Insets />
          </HBox.margin>
          <children>
-            <Label fx:id= "currPlayer">
+            <Label fx:id="currPlayer">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </Label>
-            <Label  fx:id="firstPlayerPoints" />
-            <Label  fx:id="secondPlayerPoints"/>
+            <Label fx:id="firstPlayerPoints" />
+            <Label fx:id="secondPlayerPoints" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goHome" prefHeight="30.0" prefWidth="100.0" text="Home">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
          </children>
    	</VBox>
    </children>

@@ -7,37 +7,53 @@ public class HumanPlayer {
 	private int points;
 	private String color;
 	
+	/**
+     * Constructor.
+     * @param p the disk.
+     */
 	public HumanPlayer(char p, String color) {
 	    this.disk = p;
 		this.points = 0;
 		this.color = color;
 	}
 	
+	/**
+     * Choose square.
+     * @return the location of the square.
+     */
 	public Point chooseSquare(ArrayList<Point> vecPoints) {
 	    int x = 0, y = 0;
-	    /*char a;
-	    System.in.
-	    cin >> x >> a >> y;
-	    if(!x || !y) {
-	        cin.clear();
-	        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	        return Point(0, 0);
-	    }*/
 	    return new Point(x, y);
 	}
 	
+	/**
+     * Return the disk.
+     * @return the disk.
+     */
 	public char getDisk() {
 	    return this.disk;
 	}
 	
+	/**
+     * Set disk.
+     * @param d the char of the disk.
+     */
 	public void setDisk(char d) {
 	    this.disk = d;
 	}
 	
+	/**
+     * Returns the points.
+     * @return the points.
+     */
 	public int getPoint() {
 	    return this.points;
 	}
 	
+	/**
+     * Set points to player.
+     * @param newPoints thr points to set.
+     */
 	public void setPoint(int newPoints) {
 	    this.points += newPoints;
 	}
